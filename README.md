@@ -1,3 +1,4 @@
-# Interface do aplicativo
+# App-desktop-caderno-de-contas
 
-Neste arquivo foi criada a interface do app. E as funções relacionadas a ela, como o menu voltar, os widgets, imagens, entrys...
+Um aplicativo desktop que funciona como um caderno de contas. Você cadastra clientes e suas respectivas contas gerenciado o quanto seus clientes lhe devem no seu estabelecimento, caso você venda fiado.
+
