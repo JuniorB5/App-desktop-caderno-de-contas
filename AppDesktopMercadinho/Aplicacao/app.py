@@ -4,7 +4,6 @@ from gradiente import GradientFrame
 from tkinter import ttk, messagebox
 from funcoes_sqlite import FuncsSqlite
 from funcoes_txt import ArquivosTexto
-from PIL import Image, ImageTk
 import os
 
 
