@@ -1,9 +1,9 @@
 from tkinter import *
 
-
 """
 Classe que cria efeito Gradiente do frame
 """
+
 
 class GradientFrame(Canvas):
     def __init__(self, parent, color1='#C6CCFF', color2='gray35', **kwargs):
@@ -29,5 +29,5 @@ class GradientFrame(Canvas):
             gr = int(g1 + (g_ratio * i))
             br = int(b1 + (b_ratio * i))
             color = "#%4.4x%4.4x%4.4x" % (nr, gr, br)
-            self.create_line(i, 0, i, height, tags=('gradiente', ), fill=color)
+            self.create_line(i, 0, i, height, tags=('gradiente',), fill=color)
         self.lower('gradient')

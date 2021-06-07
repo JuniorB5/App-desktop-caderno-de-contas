@@ -4,6 +4,8 @@ from gradiente import GradientFrame
 from tkinter import ttk, messagebox
 from funcoes_sqlite import FuncsSqlite
 from funcoes_txt import ArquivosTexto
+from PIL import Image, ImageTk
+import os
 
 
 class Front(FuncsSqlite, ArquivosTexto):
@@ -16,11 +18,11 @@ class Front(FuncsSqlite, ArquivosTexto):
         """
         Faz as configurações inicais da tela e põe a imagem de fundo na Interface
         """
+        self.back_interface = PhotoImage(
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\tecnology7.png')
+        label_interface = Label(self.window, image=self.back_interface, bg='white')
         self.window.geometry("1919x1056")
         self.window.title('Contas')
-        self.back_interface = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\back_interface.png')
-        label_interface = Label(self.window, image=self.back_interface)
         label_interface.pack()
 
     def CreateFrames(self):
@@ -40,17 +42,21 @@ class Front(FuncsSqlite, ArquivosTexto):
                                          highlightthickness=2,
                                          color1='#00BFFF', color2='#1E90FF')
 
+        self.frame_creditos = GradientFrame(self.window, bd=4, highlightbackground='#759fe6',
+                                         highlightthickness=2,
+                                         color1='#00BFFF', color2='#1E90FF')
+
     def WidgetsIniciais(self):
         """
         Cria os botões da Interface Inicial
         """
         # Ícones dos botões da Interface Inicial
         self.img_cadastro = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\icone_cadastro.png')
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\cliente_cadastro.png')
         self.img_excluir = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\icone_deletar.png')
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\cliente_delete.png')
         self.img_conta = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\icone_conta.png')
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\atualizando.png')
 
         # Label e Botão de cadastro
         self.button_cadastro = Button(self.window, image=self.img_cadastro, cursor='hand2',
@@ -121,11 +127,11 @@ class Front(FuncsSqlite, ArquivosTexto):
 
         # imagens
         self.icone_pesquisa = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\icone_pesquisa.png')
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\icone_pesquisa.png')
         self.icone_atualizar_conta = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\icone_att.png')
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\icone_att.png')
         self.icone_abrir = PhotoImage(
-            file='C:\\Users\\JR BARBOSA\\Desktop\\tkinterframe\\ProjetoTkinterMerc\\img\\icone_abrir.png')
+            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\icone_abrir.png')
 
         # Lista onde aparecem os clientes e suas contas.
         self.lista_ver_conta = ttk.Treeview(self.frame_lista, height=3, column='nome')
@@ -163,6 +169,28 @@ class Front(FuncsSqlite, ArquivosTexto):
         self.SelectLista(self.lista_ver_conta)
 
         self.lista_ver_conta.bind('<Double-1>', self.SelectDoubleClick)
+
+    def WidgetsCreditos(self):
+        self.frame_creditos.place(relx=0.28, rely=0.05, relwidth=0.4, relheight=0.9)
+
+        self.imagem_back = PhotoImage(file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\back_interface_credito.png')
+        self.imagem_icone_cadastro = PhotoImage(file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\cliente_cadastro.png')
+        self.imagem_icone_atualizar = PhotoImage(file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\atualizando.png')
+
+        self.label_back = Label(self.frame_creditos, image=self.imagem_back)
+        self.label_cadastro_credito = Label(self.frame_creditos, image=self.imagem_icone_cadastro)
+        self.label_delete_credito = Label(self.frame_creditos, image=self.imagem_icone_atualizar)
+
+        self.label_back.place(relx=0.05, rely=0.1)
+        self.label_cadastro_credito.place(relx=0.05, rely=0.4)
+        self.label_delete_credito.place(relx=0.28, rely=0.4)
+
+        self.label_back_texto = Label(self.frame_creditos, text='Link da Imagem original: https://pt.vecteezy.com/vetor-gratis/computador')
+        self.label_back_texto.place(relx=0.46, rely=0.2)
+
+        self.label_icones_texto = Label(self.frame_creditos, text=f'Links do Site original dos ícones:{os.linesep} https://www.freepik.com{os.linesep}'
+                                                                  'https://www.flaticon.com/br/')
+        self.label_icones_texto.place(relx=0.61, rely=0.44)
 
     # As funções abaixo são os comandos que serão executados ao acionar os botões da interface inicial
 
@@ -262,6 +290,8 @@ class Front(FuncsSqlite, ArquivosTexto):
 
         self.menu_volta.add_command(label='Voltar', command=self.BackMenu)
 
+        self.menu_volta.add_command(label='Créditos', command=self.MostrarCreditos)
+
     def SelectDoubleClick(self, event):
         """Função que insere o nome do cliente dentro da entry de busca ao dar um duplo clique no nome do cliente"""
         self.entry_buscar_lista.delete(0, END)
@@ -286,7 +316,33 @@ class Front(FuncsSqlite, ArquivosTexto):
         if self.frame_lista:
             self.frame_lista.place_forget()
 
+        if self.frame_creditos:
+            self.frame_creditos.place_forget()
+
         self.WidgetsIniciais()
+
+    def LimparTodosWidgets(self):
+        """
+        Comando que apaga todos os Widgets da tela. Que será utilizado para mostrar os créditos das imagens na opção créditos do menu.
+        """
+        if self.frame_cad:
+            self.frame_cad.place_forget()
+
+        if self.frame_del:
+            self.frame_del.place_forget()
+
+        if self.frame_lista:
+            self.frame_lista.place_forget()
+
+        if self.button_cadastro:
+            self.LimparWidgetsIniciais()
+
+    def MostrarCreditos(self):
+        """
+        Comando que 'chama' a interface que mostra os créditos das imagen na tela.
+        """
+        self.LimparTodosWidgets()
+        self.WidgetsCreditos()
 
     def Iniciar(self):
         """

@@ -78,14 +78,18 @@ class FuncsSqlite:
         self.Conection()
         lista.delete(*lista.get_children())
 
+        entry_nome.insert(END, '%')
+
         nome = entry_nome.get()
 
         self.cursor.execute(
-            f""" SELECT nome FROM Clientes WHERE nome LIKE '%s' ORDER BY nome ASC """ % nome)
+            f""" SELECT nome FROM clientes WHERE nome LIKE '%s' ORDER BY nome ASC """ % nome)
         nome_busca = self.cursor.fetchall()
 
         for n in nome_busca:
             lista.insert("", END, values=n)
+
+        entry_nome.delete(0, END)
 
         self.CloseConection()
 
