@@ -12,13 +12,14 @@ class Front(FuncsSqlite, ArquivosTexto):
     def __init__(self):
         self.window = Tk()
         self.CreateTable()
+        self.path = os.getcwd() # Caminho do diretório para referenciar as imagens em qualquer computador
 
     def WindowConfigure(self):
         """
         Faz as configurações inicais da tela e põe a imagem de fundo na Interface
         """
         self.back_interface = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\tecnology7.png')
+            file=os.path.join(self.path, 'img\\tecnology7.png'))
         label_interface = Label(self.window, image=self.back_interface, bg='white')
         self.window.geometry("1919x1056")
         self.window.title('Contas')
@@ -51,11 +52,11 @@ class Front(FuncsSqlite, ArquivosTexto):
         """
         # Ícones dos botões da Interface Inicial
         self.img_cadastro = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\cliente_cadastro.png')
+            file=os.path.join(self.path, 'img\\cliente_cadastro.png'))
         self.img_excluir = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\cliente_delete.png')
+            file=os.path.join(self.path, 'img\\cliente_delete.png'))
         self.img_conta = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\atualizando.png')
+            file=os.path.join(self.path, 'img\\atualizando.png'))
 
         # Label e Botão de cadastro
         self.button_cadastro = Button(self.window, image=self.img_cadastro, cursor='hand2',
@@ -126,11 +127,11 @@ class Front(FuncsSqlite, ArquivosTexto):
 
         # imagens
         self.icone_pesquisa = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\icone_pesquisa.png')
+            file=os.path.join(self.path, 'img\\icone_pesquisa.png'))
         self.icone_atualizar_conta = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\icone_att.png')
+            file=os.path.join(self.path, 'img\\icone_att.png'))
         self.icone_abrir = PhotoImage(
-            file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\icone_abrir.png')
+            file=os.path.join(self.path, 'img\\icone_abrir.png'))
 
         # Lista onde aparecem os clientes e suas contas.
         self.lista_ver_conta = ttk.Treeview(self.frame_lista, height=3, column='nome')
@@ -172,9 +173,9 @@ class Front(FuncsSqlite, ArquivosTexto):
     def WidgetsCreditos(self):
         self.frame_creditos.place(relx=0.28, rely=0.05, relwidth=0.4, relheight=0.9)
 
-        self.imagem_back = PhotoImage(file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\back_interface_credito.png')
-        self.imagem_icone_cadastro = PhotoImage(file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\cliente_cadastro.png')
-        self.imagem_icone_atualizar = PhotoImage(file=r'C:\Users\JR BARBOSA\Desktop\tkinterframe\AppDesktopMercadinho\img\atualizando.png')
+        self.imagem_back = PhotoImage(file=r'/AppDesktopMercadinho/img/back_interface_credito.png')
+        self.imagem_icone_cadastro = PhotoImage(file=r'/AppDesktopMercadinho/img/cliente_cadastro.png')
+        self.imagem_icone_atualizar = PhotoImage(file=r'/AppDesktopMercadinho/img/atualizando.png')
 
         self.label_back = Label(self.frame_creditos, image=self.imagem_back)
         self.label_cadastro_credito = Label(self.frame_creditos, image=self.imagem_icone_cadastro)
